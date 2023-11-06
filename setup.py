@@ -11,18 +11,18 @@ with open('README.md') as f:
     README = f.read()
 
 setuptools.setup(
-    name='dcr_consistency',
+    name='sac3',
     version='0.0.1',    
-    description='A package to detect and mitigate inconsistency',
+    description='A package to detect hallucination',
     long_description=README,
     long_description_content_type='text/markdown',
     url='https://github.com/test',
-    author='Wendi Cui, Jiaxin Zhang',
-    author_email='wendi_cui@intuit.com',
+    author='Jiaxin Zhang',
+    author_email='jiaxin_zhang@intuit.com',
     license='Apache License 2.0',
-    packages=['dcr'],
+    packages=['sac3'],
     install_requires=reqs,
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
