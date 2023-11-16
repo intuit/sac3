@@ -9,19 +9,40 @@
 ## :fire: News
 
 - [2023.11] SAC$`^3`$ code is released.
+- [2023.11] SAC$`^3`$ [arxiv link](https://arxiv.org/abs/2311.01740) is available.
 - [2023.10] SAC$`^3`$ paper is accepted and to appear at EMNLP 2023.
 
 
 ## 🤔 What is SAC$`^3`$
 
-Semantic-aware cross-check consistency (SAC$`^3`$) is a novel sampling-based hallucination detection method that expands on the principle of self-consistency checking and incorporates additional mechanisms to detect both question-level and model-level hallucinations by leveraging advances including semantically equivalent question perturbation and cross-model response consistency checking. 
+Semantic-aware cross-check consistency (SAC$`^3`$) is a novel sampling-based hallucination detection method that expands on the principle of self-consistency checking and incorporates additional mechanisms to detect both question-level and model-level hallucinations by leveraging advances including semantically equivalent question perturbation and cross-model response consistency checking. More details can be found in our paper [arxiv link](https://arxiv.org/abs/2311.01740).
 
 ![](notebook/overview_sac3.png)
 
 
+**Key observation**: solely checking the self-consistency of LLMs is not sufficient for deciding factuality. Left: generated responses to the same question may be consistent but non-factual. Right: generated responses may be inconsistent with the original answer that is factually correct.
+
+![](notebook/key_observation.png)
+
+
 ## 🤖 Installation
 
-SAC$`^3`$ requires **Python version >= 3.8**. It can be installed from pip (coming soon!):
+
+#### Requirements 
+
+- python 3.8
+- openai <= 0.28.1
+
+- Create env and download all the packages required as follows: 
+
+```
+conda create -n sac3 python=3.8
+source activate sac3
+pip install -r requirements.txt
+```
+
+
+SAC$`^3`$  can be installed from pip (coming soon!):
 
 ```bash
 pip install sac3
@@ -120,6 +141,16 @@ The output is
 0.6 [1, 0, 0, 1, 1]
 ```
 
+## Ilustrative Example 
+
+An illustrative example of self-consistency, cross-question consistency, and cross-model consistency check.
+The original question and answer are “Is 3691 a prime number?” and “No, 3691 is not a prime number.
+It is divisible by 7 and 13”, respectively. Each row presents a set of sampled QA pairs along with its
+consistency regarding the original answer, and the predicted factuality of the original answer. 
+
+![](notebook/example.png)
+
+
 ## 💁Citation 
 
 ```
@@ -135,3 +166,49 @@ The output is
 ```
 
 
+<!-- ## How to use
+### Install 
+(TODO: publish to pip)
+```
+pip install dcr-consistency
+```
+### Import
+```
+from dcr.evaluator import evaluate
+from dcr.improver import improve
+```
+
+### Usage
+#### Evaluation
+```
+res = evaluate(_your_LLM_, _your_model_config_, data, worker_count=5)
+```
+The `data` depends on the prompt used. By default each item should be a dict containting fields `id`, `reference` and `candidate`. The returned item will be the original data passed in joined with the columns below:
+
+| column  | meaning   |
+|-------------|:------------|
+|  id | Unique Identifier for each row | 
+|  score | Final consistency score of the row | 
+| dce_reasons | Reaons for the final score given by DCE| 
+| amc_reasons | Reaons for scoring of each sentence given by AMC | 
+|  dce_raw | Raw data from DCE | 
+| amc_raw | Raw data from AMC | 
+|  decision | Consistency decision based on DCE | 
+
+#### Inconsitency Mitigation
+```
+res = improve(_your_LLM_, _your_model_config_, data, worker_count=5)
+```
+
+The `data` depends on the prompt used. By default each item should be a dict containting fields `id`, `article` and `sentences`. `article` is the reference. `sentences` is a list illustrating whether each sentence is or is not consistent compared to the reference and the reasons. The returned item will be the original data passed in joined with the columns below:
+
+| column  | meaning   |
+|-------------|:------------|
+|  id | Unique Identifier for each row | 
+|  improved_version | The improved version where inconsistency is mitigated | 
+| rai_raw | Raw data from RAI| 
+
+### Contributing
+
+(TODO: update link once correct repo is created)
+See [CONTRIBUTING.md](https://github.com/intuit/to_be_created/blob/main/CONTRIBUTING.md). -->

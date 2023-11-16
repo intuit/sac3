@@ -1,5 +1,4 @@
 from sac3 import llm_models
-from sac3 import genstudio_models
 
 class SemanticConsistnecyCheck:
     def __init__(self, model):
@@ -15,18 +14,20 @@ class SemanticConsistnecyCheck:
         """
         
     def score_scc(self, question, target_answer, candidate_answer, temperature):
+        if target_answer is None:
+            raise ValueError("Target answer cannot be None. ")
+
         sc_output = []  
         target_pair = 'Q:' + question + '\nA:' + target_answer
         num_candidate_answer = len(candidate_answer)
         for i in range(num_candidate_answer): 
             candidate_pair = 'Q:' + question + '\nA:' + candidate_answer[i]
             prompt = self.prompt_temp + '\nThe first QA pair is:\n' + target_pair + '\nThe second QA pair is:\n' + candidate_pair
-            res = genstudio_models.call_genstudio(prompt, '', self.model, temperature) # genstudio
-            # res = llm_models.call_openai_model(prompt, self.model, temperature) # openai
+            res = llm_models.call_openai_model(prompt, self.model, temperature) # openai model call 
             guess = res.split(':')[1].split('\n')[0].strip()
-            print(res, guess)
+            # print(res, guess)
             value = 0 if guess == 'Yes' else 1
-            print('value',value)
+            # print('value',value)
             sc_output.append(value)
         
         score = sum(sc_output)/num_candidate_answer

@@ -1,21 +1,40 @@
+import os
+os.environ['HUGGINGFACE_HUB_CACHE'] = '/home/ec2-user/SageMaker/hf_cache'
+os.environ['HF_HOME'] = '/home/ec2-user/SageMaker/hf_cache'
+
 import openai
-from peft import PeftModel    
+import torch
+from peft import PeftModel
+import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Initialize OpenAI API
 openai.api_key = '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'
+# openai.api_key = 'your openai key'
 
 def call_openai_model(prompt, model, temperature):
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt},
-        ],
-        temperature = temperature
-    )
-    output = response.choices[0].message.content
+    response = None
+    while response is None:
+        try:
+            response = openai.ChatCompletion.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": prompt},
+                ],
+                temperature = temperature
+                )
 
+        except Exception as e:
+            if 'is greater than the maximum' in str(e):
+                raise BatchSizeException()
+            print(e)
+            print('Retrying...')
+            time.sleep(2)
+        try:
+            output = response.choices[0].message.content
+        except Exception:
+            output = 'do not have reponse from chatgpt'
     return output 
 
 
@@ -28,7 +47,7 @@ def call_guanaco_33b(prompt, max_new_tokens):
         torch_dtype=torch.bfloat16,
         device_map="auto",
         # offload_folder="/home/ec2-user/SageMaker/hf_cache",
-        max_memory= {i: '16000MB' for i in range(torch.cuda.device_count())},
+        max_memory= {i: '16384MB' for i in range(torch.cuda.device_count())}, # V100 16GB
     )
     model = PeftModel.from_pretrained(model, adapters_name)
     tokenizer = AutoTokenizer.from_pretrained(model_name)

@@ -1,5 +1,4 @@
 from sac3 import llm_models
-from sac3 import genstudio_models
 
 class Evaluate:
     def __init__(self, model):
@@ -13,12 +12,11 @@ class Evaluate:
         for i in range(self_num): 
             # llm model: openai, genstudio, open-source models (falcon, guanaco)
             if self.model in ['gpt-3.5-turbo','gpt-4']:
-                res = genstudio_models.call_genstudio(prompt, '', self.model, temperature) # genstudio - pass
-                # res = llm_models.call_openai_model(prompt, self.model, temperature) # openai - pass
+                res = llm_models.call_openai_model(prompt, self.model, temperature) # openai model call
             elif self.model == 'guanaco-33b':
-                res = llm_models.call_guanaco_33b(prompt, max_new_tokens)
+                res = llm_models.call_guanaco_33b(prompt, max_new_tokens = 200)
             elif self.model == 'falcon-7b':
-                res = llm_models.call_falcon_7b(prompt, max_new_tokens)
+                res = llm_models.call_falcon_7b(prompt, max_new_tokens = 200)
             # other open-sourced llms 
             self_response.append(res)
 
@@ -30,12 +28,11 @@ class Evaluate:
             prompt = self.prompt_temp + '\nQ:' + perb_question[i]
             # llm model: openai, genstudio, open-source models (falcon, guanaco)
             if self.model in ['gpt-3.5-turbo','gpt-4']:
-                res = genstudio_models.call_genstudio(prompt, '', self.model, temperature) # genstudio - pass
-                # res = llm_models.call_openai_model(prompt, self.model, temperature) # openai - pass
+                res = llm_models.call_openai_model(prompt, self.model, temperature) # openai model call 
             elif self.model == 'guanaco-33b':
-                res = llm_models.call_guanaco_33b(prompt, max_new_tokens)
+                res = llm_models.call_guanaco_33b(prompt, max_new_tokens = 200)
             elif self.model == 'falcon-7b':
-                res = llm_models.call_falcon_7b(prompt, max_new_tokens)
+                res = llm_models.call_falcon_7b(prompt, max_new_tokens = 200)
             # other open-sourced llms 
             perb_response.append(res)
   
