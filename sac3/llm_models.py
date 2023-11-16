@@ -9,7 +9,6 @@ import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Initialize OpenAI API
-openai.api_key = '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'
 # openai.api_key = 'your openai key'
 
 def call_openai_model(prompt, model, temperature):
