@@ -122,7 +122,7 @@ from sac3.consistency_checker import SemanticConsistnecyCheck
 # call LLM to evaluate if the sampled responses are semantically equivalent to the target answer
 scc = SemanticConsistnecyCheck(model='gpt-3.5-turbo')
 
-# self consistency check 
+# self-consistency check 
 sc2_score, sc2_vote = scc.score_scc(question, target_answer, candidate_answer = self_responses, temperature = 0.0)
 print(sc2_score, sc2_vote)
 ```
@@ -141,7 +141,7 @@ The output is
 0.6 [1, 0, 0, 1, 1]
 ```
 
-## Ilustrative Example 
+### Illustrative Example 
 
 An illustrative example of self-consistency, cross-question consistency, and cross-model consistency check.
 The original question and answer are “Is 3691 a prime number?” and “No, 3691 is not a prime number.
@@ -166,49 +166,3 @@ consistency regarding the original answer, and the predicted factuality of the o
 ```
 
 
-<!-- ## How to use
-### Install 
-(TODO: publish to pip)
-```
-pip install dcr-consistency
-```
-### Import
-```
-from dcr.evaluator import evaluate
-from dcr.improver import improve
-```
-
-### Usage
-#### Evaluation
-```
-res = evaluate(_your_LLM_, _your_model_config_, data, worker_count=5)
-```
-The `data` depends on the prompt used. By default each item should be a dict containting fields `id`, `reference` and `candidate`. The returned item will be the original data passed in joined with the columns below:
-
-| column  | meaning   |
-|-------------|:------------|
-|  id | Unique Identifier for each row | 
-|  score | Final consistency score of the row | 
-| dce_reasons | Reaons for the final score given by DCE| 
-| amc_reasons | Reaons for scoring of each sentence given by AMC | 
-|  dce_raw | Raw data from DCE | 
-| amc_raw | Raw data from AMC | 
-|  decision | Consistency decision based on DCE | 
-
-#### Inconsitency Mitigation
-```
-res = improve(_your_LLM_, _your_model_config_, data, worker_count=5)
-```
-
-The `data` depends on the prompt used. By default each item should be a dict containting fields `id`, `article` and `sentences`. `article` is the reference. `sentences` is a list illustrating whether each sentence is or is not consistent compared to the reference and the reasons. The returned item will be the original data passed in joined with the columns below:
-
-| column  | meaning   |
-|-------------|:------------|
-|  id | Unique Identifier for each row | 
-|  improved_version | The improved version where inconsistency is mitigated | 
-| rai_raw | Raw data from RAI| 
-
-### Contributing
-
-(TODO: update link once correct repo is created)
-See [CONTRIBUTING.md](https://github.com/intuit/to_be_created/blob/main/CONTRIBUTING.md). -->
