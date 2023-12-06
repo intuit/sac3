@@ -6,11 +6,21 @@ class Evaluate:
         self.prompt_temp = 'Answer the following question:\n'
     
     def self_evaluate(self, self_question, temperature, self_num):
-        self_response = []  
+        '''
+        Inputs: 
+        self_question - original user query 
+        temperature - [0,1] for LLM randomness
+        self_num - how many generated responses given this question
+
+        Outputs:
+        self_responses - generated responses given this question with different temperatures
+        '''
+
+        self_responses = []  
         prompt = self.prompt_temp + '\nQ:' + self_question
     
         for i in range(self_num): 
-            # llm model: openai, genstudio, open-source models (falcon, guanaco)
+            # llm model: GPTs, open-source models (falcon, guanaco)
             if self.model in ['gpt-3.5-turbo','gpt-4']:
                 res = llm_models.call_openai_model(prompt, self.model, temperature) # openai model call
             elif self.model == 'guanaco-33b':
@@ -18,15 +28,24 @@ class Evaluate:
             elif self.model == 'falcon-7b':
                 res = llm_models.call_falcon_7b(prompt, max_new_tokens = 200)
             # other open-sourced llms 
-            self_response.append(res)
+            self_responses.append(res)
 
-        return self_response
+        return self_responses
     
-    def perb_evaluate(self, perb_question, temperature):
-        perb_response = []  
-        for i in range(len(perb_question)):
-            prompt = self.prompt_temp + '\nQ:' + perb_question[i]
-            # llm model: openai, genstudio, open-source models (falcon, guanaco)
+    def perb_evaluate(self, perb_questions, temperature):
+        '''
+        Inputs: 
+        perb_questions - perturbed questions that are semantically equivalent to the original question
+        temperature - [0,1] for LLM randomness
+
+        Outputs:
+        perb_responses - generated responses given the perturbed questions
+        '''
+        
+        perb_responses = []  
+        for i in range(len(perb_questions)):
+            prompt = self.prompt_temp + '\nQ:' + perb_questions[i]
+            # llm model: GPTs, open-source models (falcon, guanaco)
             if self.model in ['gpt-3.5-turbo','gpt-4']:
                 res = llm_models.call_openai_model(prompt, self.model, temperature) # openai model call 
             elif self.model == 'guanaco-33b':
@@ -34,6 +53,6 @@ class Evaluate:
             elif self.model == 'falcon-7b':
                 res = llm_models.call_falcon_7b(prompt, max_new_tokens = 200)
             # other open-sourced llms 
-            perb_response.append(res)
+            perb_responses.append(res)
   
-        return perb_response
+        return perb_responses

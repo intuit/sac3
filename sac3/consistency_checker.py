@@ -13,15 +13,27 @@ class SemanticConsistnecyCheck:
         just the probability!>
         """
         
-    def score_scc(self, question, target_answer, candidate_answer, temperature):
+    def score_scc(self, question, target_answer, candidate_answers, temperature):
+        '''
+        Inputs:
+        question - original user query
+        target_answer - generated response given the original question (temp=0) if not provided by user 
+        candidate_answers - generated responses given the question (original + perturbed)
+        temperature - [0,1] for LLM randomness
+
+        Outputs:
+        score - inconsistency score (hallucination metric) 
+        sc_output - specific score for each candidate answers compared with the target answer  
+        '''
+
         if target_answer is None:
             raise ValueError("Target answer cannot be None. ")
 
         sc_output = []  
         target_pair = 'Q:' + question + '\nA:' + target_answer
-        num_candidate_answer = len(candidate_answer)
+        num_candidate_answer = len(candidate_answers)
         for i in range(num_candidate_answer): 
-            candidate_pair = 'Q:' + question + '\nA:' + candidate_answer[i]
+            candidate_pair = 'Q:' + question + '\nA:' + candidate_answers[i]
             prompt = self.prompt_temp + '\nThe first QA pair is:\n' + target_pair + '\nThe second QA pair is:\n' + candidate_pair
             res = llm_models.call_openai_model(prompt, self.model, temperature) # openai model call 
             guess = res.split(':')[1].split('\n')[0].strip()
