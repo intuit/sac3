@@ -52,7 +52,8 @@ pip install sac3
 ## 🚀 Quickstart
 The easiest way to start playing is
 1. [```Jupyter Notebook```](notebook/quick_start.ipynb)
-2. Google Colab (coming soon)
+2. Directly run ```python main.py```
+3. Google Colab (coming soon)
 
 
 ## 📃 Usage
