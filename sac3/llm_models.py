@@ -7,6 +7,7 @@ import torch
 from peft import PeftModel
 import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import time
 
 # Initialize OpenAI API
 # openai.api_key = 'your openai key'
