@@ -1,6 +1,7 @@
 import os
-os.environ['HUGGINGFACE_HUB_CACHE'] = '/home/ec2-user/SageMaker/hf_cache'
-os.environ['HF_HOME'] = '/home/ec2-user/SageMaker/hf_cache'
+# update your cache dir 
+# os.environ['HUGGINGFACE_HUB_CACHE'] = '/home/ec2-user/SageMaker/hf_cache'
+# os.environ['HF_HOME'] = '/home/ec2-user/SageMaker/hf_cache'
 
 import openai
 import torch
