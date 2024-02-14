@@ -7,7 +7,7 @@
 
 
 ## :fire: News
-
+- [2024.02] FastSAC$`^3`$ is a faster version of SAC$`^3`$, reducing the time cost via multithread parallelization.  
 - [2023.11] SAC$`^3`$ code is released.
 - [2023.11] SAC$`^3`$ [arxiv link](https://arxiv.org/abs/2311.01740) is available.
 - [2023.10] SAC$`^3`$ paper is accepted and to appear at EMNLP 2023.
@@ -18,6 +18,20 @@
 Semantic-aware cross-check consistency (SAC$`^3`$) is a novel sampling-based hallucination detection method that expands on the principle of self-consistency checking and incorporates additional mechanisms to detect both question-level and model-level hallucinations by leveraging advances including semantically equivalent question perturbation and cross-model response consistency checking. More details can be found in our paper [arxiv link](https://arxiv.org/abs/2311.01740).
 
 ![](notebook/overview_sac3.png)
+
+## 🤔 What is FastSAC$`^3`$ [NEW!]
+
+The major time cost of SAC$`^3`$ is from two phases: sampled evaluations and pair-wise consistency checks. However, both phases can be accelerated by using multithread parallelization. We provide a parallelized version to significantly reduce the time cost while maintaining the same performance accuracy. Please see our [HotpotQA demo](https://github.com/intuit/sac3/blob/main/fastsac3/hotpotQA_demo.ipynb). 
+
+We tested 100 data from [HotpotQA-halu](https://github.com/RUCAIBox/HaluEval) dataset, with different sample sizes (3,5,10,15). The average time per query/question is slightly increasing as the sample size increases but the AUROC performance is almost consistent. 
+
+|    100 data    | 3 samples | 5 samples | 10 samples | 15 samples |
+|:--------------:|:---------:|:---------:|:----------:|:----------:|
+| Time per query |   2.23s   |   2.30s   |    4.01s   |    5.45s   |
+|      AUROC     |   0.682   |   0.671   |    0.678   |    0.680   |
+
+
+
 
 
 **Key observation**: solely checking the self-consistency of LLMs is not sufficient for deciding factuality. Left: generated responses to the same question may be consistent but non-factual. Right: generated responses may be inconsistent with the original answer that is factually correct.
