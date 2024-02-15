@@ -21,7 +21,14 @@ Semantic-aware cross-check consistency (SAC$`^3`$) is a novel sampling-based hal
 
 ![](notebook/overview_sac3.png)
 
-## 🤔 What is FastSAC$`^3`$ [NEW!]
+
+**Key observation**: solely checking the self-consistency of LLMs is not sufficient for deciding factuality. Left: generated responses to the same question may be consistent but non-factual. Right: generated responses may be inconsistent with the original answer that is factually correct.
+
+![](notebook/key_observation.png)
+
+
+--- 
+### 🤔 What is FastSAC$`^3`$ [NEW!]
 
 The major time cost of SAC$`^3`$ is from two phases: sampled evaluations and pair-wise consistency checks. However, both phases can be accelerated by using multithread parallelization. We provide a parallelized version to significantly reduce the time cost while maintaining the same performance accuracy. 
 
@@ -35,10 +42,6 @@ We tested 100 data from [HotpotQA-halu](https://github.com/RUCAIBox/HaluEval) da
 
 
 
-
-**Key observation**: solely checking the self-consistency of LLMs is not sufficient for deciding factuality. Left: generated responses to the same question may be consistent but non-factual. Right: generated responses may be inconsistent with the original answer that is factually correct.
-
-![](notebook/key_observation.png)
 
 
 ## 🤖 Installation
