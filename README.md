@@ -27,10 +27,10 @@ The major time cost of SAC$`^3`$ is from two phases: sampled evaluations and pai
 
 We tested 100 data from [HotpotQA-halu](https://github.com/RUCAIBox/HaluEval) dataset, with different sample sizes (3,5,10,15). The average time per query/question is slightly increasing as the sample size increases but the AUROC performance is almost consistent. Please see our [HotpotQA demo](https://github.com/intuit/sac3/blob/main/fastsac3/hotpotQA_demo.ipynb). 
 
-|    100 data    | 3 samples | 5 samples | 10 samples | 15 samples |
-|:--------------:|:---------:|:---------:|:----------:|:----------:|
-| Time per query |   2.23s   |   2.30s   |    4.01s   |    5.45s   |
-|      AUROC     |   0.682   |   0.671   |    0.678   |    0.680   |
+   |    100 data    | 3 samples | 5 samples | 10 samples | 15 samples |
+   |:--------------:|:---------:|:---------:|:----------:|:----------:|
+   | Time per query |   2.23s   |   2.30s   |    4.01s   |    5.45s   |
+   |      AUROC     |   0.682   |   0.671   |    0.678   |    0.680   |
 
 
 
