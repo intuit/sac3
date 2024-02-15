@@ -23,9 +23,9 @@ Semantic-aware cross-check consistency (SAC$`^3`$) is a novel sampling-based hal
 
 ## 🤔 What is FastSAC$`^3`$ [NEW!]
 
-The major time cost of SAC$`^3`$ is from two phases: sampled evaluations and pair-wise consistency checks. However, both phases can be accelerated by using multithread parallelization. We provide a parallelized version to significantly reduce the time cost while maintaining the same performance accuracy. Please see our [HotpotQA demo](https://github.com/intuit/sac3/blob/main/fastsac3/hotpotQA_demo.ipynb). 
+The major time cost of SAC$`^3`$ is from two phases: sampled evaluations and pair-wise consistency checks. However, both phases can be accelerated by using multithread parallelization. We provide a parallelized version to significantly reduce the time cost while maintaining the same performance accuracy. 
 
-We tested 100 data from [HotpotQA-halu](https://github.com/RUCAIBox/HaluEval) dataset, with different sample sizes (3,5,10,15). The average time per query/question is slightly increasing as the sample size increases but the AUROC performance is almost consistent. 
+We tested 100 data from [HotpotQA-halu](https://github.com/RUCAIBox/HaluEval) dataset, with different sample sizes (3,5,10,15). The average time per query/question is slightly increasing as the sample size increases but the AUROC performance is almost consistent. Please see our [HotpotQA demo](https://github.com/intuit/sac3/blob/main/fastsac3/hotpotQA_demo.ipynb). 
 
 |    100 data    | 3 samples | 5 samples | 10 samples | 15 samples |
 |:--------------:|:---------:|:---------:|:----------:|:----------:|
