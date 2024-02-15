@@ -174,14 +174,21 @@ consistency regarding the original answer, and the predicted factuality of the o
 ## 💁Citation 
 
 ```
-@inproceedings{zhang2023sac3,
-      title={SAC^3: Reliable Hallucination Detection in Black-Box Language Models via Semantic-aware Cross-check Consistency},
-      author={Jiaxin Zhang, Zhuohang Li, Kamalika Das, Bradley Malin, Sricharan Kumar},
-      booktitle={EMNLP},
-      year={2023},
-      eprint={2311.01740},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@inproceedings{zhang-etal-2023-sac3,
+    title = "{SAC}$^3$: Reliable Hallucination Detection in Black-Box Language Models via Semantic-aware Cross-check Consistency",
+    author = "Zhang, Jiaxin  and
+      Li, Zhuohang  and
+      Das, Kamalika  and
+      Malin, Bradley  and
+      Kumar, Sricharan",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2023",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.findings-emnlp.1032",
+    doi = "10.18653/v1/2023.findings-emnlp.1032",
+    pages = "15445--15458"
 }
 ```
 
