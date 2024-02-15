@@ -6,7 +6,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import time
 
 # Initialize OpenAI API
-openai.api_key = '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' # 01-15-2024 
+openai.api_key = 'your api key' 
 
 def call_openai_model(prompt, model, temperature):
     response = None
