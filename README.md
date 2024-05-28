@@ -7,6 +7,7 @@
 
 
 ## :fire: News
+- [2024.05] SAC$`^3`$ work was presented as a lightning talk in [Intuit Open Source Meetup](https://lu.ma/intuitoss)!  
 - [2024.02] FastSAC$`^3`$ is a faster version of SAC$`^3`$, reducing the time cost via multithread parallelization.
 - [2024.02] SAC$`^3`$ work will be presented in [AI for Production](https://home.mlops.community/home/events/ai-in-production-2024-02-15) organized by MLOps community!  
 - [2023.12] SAC$`^3`$ blog is published in [Intuit Engineering](https://medium.com/intuit-engineering/intuit-ai-research-debuts-novel-approach-to-reliable-hallucination-detection-in-black-box-language-746d7f720c50) 
